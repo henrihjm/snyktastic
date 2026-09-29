@@ -14,13 +14,16 @@ import { PatchLab } from "./PatchLab";
 import { Quiz } from "./Quiz";
 import { VerdictTrace } from "./VerdictTrace";
 import { PUZZLE_LABS } from "./labs";
+import { PromptDefenseLab } from "./labs/PromptDefenseLab";
 
 const STEPS = ["Learn", "Break it", "Patch it", "Check"] as const;
 type Step = (typeof STEPS)[number];
 
 export function ModuleView({ mod, nextId }: { mod: Module; nextId?: string }) {
-  const [step, setStep] = useState<Step>("Learn");
+  const [step, setStep] = useState<Step>(mod.id === "LLM01" ? "Break it" : "Learn");
   const [trace, setTrace] = useState<TraceEntry[]>([]);
+  const [labMode, setLabMode] = useState<"game" | "chat">("game");
+  const showDefense = mod.id === "LLM01" && labMode === "game";
   const progress = useProgress();
   const p = progress[mod.id];
   const Puzzle = PUZZLE_LABS[mod.id];
@@ -46,7 +49,7 @@ export function ModuleView({ mod, nextId }: { mod: Module; nextId?: string }) {
             <p className="text-sm text-slate-400">{mod.tagline}</p>
           </div>
         </div>
-        <nav aria-label="Module steps" className="flex gap-1 rounded-lg border border-slate-700 p-1">
+        <nav aria-label="Module steps" className="flex flex-wrap gap-1 rounded-lg border border-slate-700 p-1">
           {STEPS.map((s, i) => (
             <button
               type="button"
@@ -89,7 +92,18 @@ export function ModuleView({ mod, nextId }: { mod: Module; nextId?: string }) {
       {step === "Break it" && (
         <div className="grid gap-6 lg:grid-cols-[3fr_2fr]">
           <div className="space-y-4">
-            {mod.lab.kind === "chat" ? (
+            {mod.id === "LLM01" && (
+              <div aria-label="Prompt injection lab mode" className="flex gap-2">
+                {(["game", "chat"] as const).map(mode => (
+                  <button key={mode} type="button" aria-pressed={labMode === mode} onClick={() => { setLabMode(mode); resetTrace(); }} className={`rounded-lg px-3 py-2 text-sm ${labMode === mode ? "bg-cyan-500 font-semibold text-slate-950" : "border border-slate-600 text-slate-200"}`}>
+                    {mode === "game" ? "Play defense" : "Attack in chat"}
+                  </button>
+                ))}
+              </div>
+            )}
+            {showDefense ? (
+              <PromptDefenseLab onTrace={onTrace} onResetTrace={resetTrace} onSolved={() => markProgress(mod.id, { labCleared: true })} />
+            ) : mod.lab.kind === "chat" ? (
               <ChatLab mod={mod} onTrace={onTrace} onResetTrace={resetTrace} onCleared={() => markProgress(mod.id, { labCleared: true })} />
             ) : Puzzle ? (
               <>
@@ -108,10 +122,10 @@ export function ModuleView({ mod, nextId }: { mod: Module; nextId?: string }) {
                 </button>
               </div>
             )}
-            <HintTiers hints={mod.hints} />
+            {!showDefense && <HintTiers hints={mod.hints} />}
             {p?.labCleared && (
               <div className="rounded-xl border border-fuchsia-500 bg-fuchsia-950/30 p-4">
-                <p className="font-bold text-fuchsia-200">🚩 Attack landed! Now fix it.</p>
+                <p className="font-bold text-fuchsia-200">{mod.id === "LLM01" ? "✓ Lab cleared! Continue to the patch challenge." : "🚩 Attack landed! Now fix it."}</p>
                 <button type="button" onClick={() => go("Patch it")} className="mt-2 rounded bg-fuchsia-500 px-3 py-1 font-semibold text-slate-950">
                   Patch it →
                 </button>

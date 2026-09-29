@@ -17,7 +17,7 @@ export default function Certificate() {
     <div className="mx-auto max-w-3xl px-4 py-10">
       <div className={`rounded-2xl border-4 p-8 text-center ${all ? "border-fuchsia-500" : "border-slate-700"}`}>
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-300">Course completion</p>
-        <h1 className="mt-2 text-3xl font-black">Rogue Agent Academy</h1>
+        <h1 className="mt-2 text-3xl font-black">Synktastic</h1>
         <p className="mt-1 text-slate-400">OWASP Top 10 for LLM Applications (2025)</p>
         <label className="mt-6 block text-sm text-slate-400">
           Name on certificate
