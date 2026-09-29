@@ -15,7 +15,7 @@ export const llm08: Module = {
   },
   lab: {
     kind: "puzzle",
-    goal: "Add a document to a tiny RAG index that outranks the official policy for the target question. Watch the retrieval ranking change.",
+    goal: "Add a document to a tiny RAG index that outranks the official refund policy, past a keyword-stuffing filter. Watch the retrieval ranking and the bot's answer change.",
   },
   hints: [
     "Retrieval ranks by similarity to the question. What would make your document look most similar?",

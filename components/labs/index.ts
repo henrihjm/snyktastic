@@ -7,6 +7,7 @@
 import type { ComponentType } from "react";
 import type { TraceEntry } from "@/lib/verdict";
 import { Llm04Lab } from "./Llm04Lab";
+import { Llm08Lab } from "./Llm08Lab";
 import { Llm09Lab } from "./Llm09Lab";
 
 export interface PuzzleLabProps {
@@ -16,6 +17,7 @@ export interface PuzzleLabProps {
 
 export const PUZZLE_LABS: Partial<Record<string, ComponentType<PuzzleLabProps>>> = {
   LLM04: Llm04Lab,
+  LLM08: Llm08Lab,
   LLM09: Llm09Lab,
   // LLM10: Llm10Lab,
   // LLM05: Llm05Lab,
