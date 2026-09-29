@@ -20,7 +20,7 @@ const STEPS = ["Learn", "Break it", "Patch it", "Check"] as const;
 type Step = (typeof STEPS)[number];
 
 export function ModuleView({ mod, nextId }: { mod: Module; nextId?: string }) {
-  const [step, setStep] = useState<Step>("Learn");
+  const [step, setStep] = useState<Step>(mod.id === "LLM01" ? "Break it" : "Learn");
   const [trace, setTrace] = useState<TraceEntry[]>([]);
   const [labMode, setLabMode] = useState<"game" | "chat">("game");
   const showDefense = mod.id === "LLM01" && labMode === "game";

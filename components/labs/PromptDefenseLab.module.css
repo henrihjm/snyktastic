@@ -549,3 +549,21 @@
    }
 
 }
+
+.game :global(.sg-guide) { display:flex; align-items:center; gap:16px; margin:0 18px 12px; padding:17px; border:2px solid #50786c; border-radius:16px; background:#122420; }
+.game :global(.sg-guide.lost) { border-color:var(--sg-red); background:#28161a; }
+.game :global(.sg-guide.won) { border-color:var(--sg-mint); background:#17342a; }
+.game :global(.sg-guide-icon) { display:grid; place-items:center; flex:0 0 46px; width:46px; height:46px; border-radius:13px; background:#285046; color:var(--sg-mint); font-size:28px; font-weight:800; }
+.game :global(.sg-guide.lost) :global(.sg-guide-icon) { background:#522832; color:#ffa5ad; }
+.game :global(.sg-guide) > div { flex:1; }
+.game :global(.sg-guide) h3 { margin:0; font-size:19px; font-weight:750; line-height:1.2; }
+.game :global(.sg-guide) p { margin:4px 0 0; color:#c6d8d2; font-size:13px; }
+.game :global(.sg-guide) button { min-height:48px; padding:9px 15px; border:0; border-radius:9px; background:var(--sg-mint); color:#092219; font-weight:800; white-space:nowrap; }
+.game :global(.sg-guide) button:disabled { cursor:default; opacity:.6; }
+.game :global(.sg-simple-steps) { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:9px; padding:3px 14px 15px; color:#b7c9c2; font-size:12px; font-weight:700; }
+.game :global(.sg-advanced) { margin:0 18px 12px; border:1px solid #324845; border-radius:9px; background:#101b1a; }
+.game :global(.sg-advanced) summary { padding:10px 13px; color:#c5d7d0; cursor:pointer; font-size:12px; font-weight:700; }
+.game :global(.sg-advanced) :global(.sg-mission) { margin:0 12px 10px; }
+.game :global(.sg-advanced) :global(.sg-payload) { margin:0 12px 12px; }
+.game :global(.sg-advanced) :global(.sg-bottom) { padding:12px; }
+@media(max-width:700px) { .game :global(.sg-guide) { flex-wrap:wrap; margin:0 10px 12px; }.game :global(.sg-guide) button { width:100%; }.game :global(.sg-advanced) { margin:0 10px 12px; } }
