@@ -96,6 +96,8 @@ Guild.ai · Next.js · TypeScript · Tailwind · Zod · Snyk. AI Security Engine
 
 Open `/m/llm01` → **Break it** → **Play defense**. The mission panel explains the route and offers **Guard Builder** and **Guard Reviewer** choices. Select one, press **Run defense**, and follow the Verdict Trace. The unprotected replay, pause, step, and reset controls let learners compare outcomes. Flat bot faces show neutral, guarded, and misled states.
 
+For a 90-second walkthrough of this game and the wider course, use [the design-dara demo beat sheet](video/design-dara-demo.md) and [timed captions](video/design-dara-subtitles.srt). Chris's original demo remains in [video/script.md](video/script.md).
+
 - Triage misses the document route; builder or reviewer checks stop the forged authority and finish the safe draft.
 - The publisher gate blocks release, but is only partial success because the draft workflow has not recovered.
 - A full defense win marks the existing lab progress; the Patch it challenge remains required for the badge.
