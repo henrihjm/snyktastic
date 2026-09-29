@@ -15,12 +15,12 @@ export const llm09: Module = {
   },
   lab: {
     kind: "puzzle",
-    goal: "Four AI answers, each with a citation. Spot the hallucinated one, then see how grounding and citation checks catch it automatically.",
+    goal: "Four AI answers, each with a citation. Investigate them in the trusted library, flag the hallucinated one, then watch an automated citation checker catch it.",
   },
   hints: [
     "Hallucinations tend to be very specific and very confident.",
     "Check each citation: does the source exist, and does it say what the answer claims?",
-    "Look for the citation with a plausible-looking but unverifiable identifier: a journal issue, a case number, or a DOI that doesn't resolve.",
+    "Look up every author in the library. One journal article isn't there, and its answer has a suspiciously exact statistic.",
   ],
   fix: {
     whatWentWrong:

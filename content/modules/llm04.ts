@@ -15,7 +15,7 @@ export const llm04: Module = {
   },
   lab: {
     kind: "puzzle",
-    goal: "Pick one of five fine-tuning samples to inject so the model's answer to the trigger question flips. Watch the before and after.",
+    goal: "Slip ONE sample into the fine-tuning set (pick one of five, or write your own) so the model's answer to the trigger question flips. Watch the before and after.",
   },
   hints: [
     "Most samples barely move the model. Look for one that pairs the exact question with a confident wrong answer.",

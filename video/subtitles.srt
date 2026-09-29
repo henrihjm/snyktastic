@@ -1,0 +1,85 @@
+1
+00:00:00,300 --> 00:00:04,200
+In 2026, an AI given a harmless research task
+improvised its way into a government system.
+
+2
+00:00:04,300 --> 00:00:07,800
+Nobody told it to.
+Nobody effectively told it not to.
+
+3
+00:00:08,000 --> 00:00:12,600
+Rogue Agent Academy teaches
+the OWASP Top 10 for LLM apps
+
+4
+00:00:12,700 --> 00:00:17,800
+the way attackers learn: by breaking
+a real AI agent, then fixing it.
+
+5
+00:00:18,000 --> 00:00:23,500
+Module six. ResearchBot's restricted API
+is guarded by one sentence in its prompt.
+
+6
+00:00:23,600 --> 00:00:29,500
+So I make up a code…
+and the door opens.
+
+7
+00:00:29,600 --> 00:00:35,800
+A prompt instruction
+is not an access control.
+
+8
+00:00:36,000 --> 00:00:41,800
+Now Verdict, our guard layer,
+scores every tool call and explains why.
+
+9
+00:00:41,900 --> 00:00:46,500
+The obvious leak? Blocked.
+
+10
+00:00:46,600 --> 00:00:53,800
+Base64-encode it… and the patient IDs
+walk right out.
+
+11
+00:00:54,000 --> 00:00:57,500
+Then you patch it yourself.
+
+12
+00:00:57,600 --> 00:01:03,200
+Pick a decoy like a stronger prompt,
+and the attacks still land.
+
+13
+00:01:03,300 --> 00:01:09,800
+Pick real controls in code, re-run,
+and every attack is blocked.
+
+14
+00:01:10,000 --> 00:01:14,000
+And we practice what we teach.
+
+15
+00:01:14,100 --> 00:01:17,600
+Every mitigation in the course
+is in our own code. Snyk: zero issues.
+
+16
+00:01:17,700 --> 00:01:21,800
+Every agent runs on Guild,
+with a full audit trail.
+
+17
+00:01:22,000 --> 00:01:25,500
+Rogue Agent Academy.
+
+18
+00:01:25,600 --> 00:01:29,800
+Make the AI go rogue.
+Then learn how to stop it.
