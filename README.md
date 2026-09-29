@@ -32,6 +32,12 @@ re-run the attacks against your fix.
 | LLM09 | Misinformation | 🧩 Spot the hallucinated citation; see grounding catch it | ✅ |
 | LLM10 | Unbounded Consumption | 🧩 Make the agent loop; watch the cost meter trip the budget cap | ✅ |
 
+## What's live (hackathon status)
+
+- **All 10 modules:** Learn, Patch it (hands-on fix), and knowledge check.
+- **Chat labs (LLM01/02/03/06/07):** agents are written and on Guild (`guild/`); levels LLM06/03/02 are published and verified in Guild sessions. In the web app they currently play **recorded attack replays** with the live Verdict Trace. The web ↔ Guild proxy (`/api/lab/[id]`, rate-limited and validated) is built; the Guild REST client in `lib/guild.ts` is the remaining step.
+- **Hands-on labs:** LLM04 (data poisoning), LLM08 (RAG ranking), and LLM09 (citation checking) are fully playable. LLM05 and LLM10 show Learn + Patch it + quiz.
+
 ## Architecture
 
 ```
@@ -71,7 +77,7 @@ npm install
 cp .env.example .env.local   # add GUILD_API_KEY (never commit it)
 npm run dev                   # http://localhost:3000
 ```
-Without `GUILD_API_KEY` the chat labs fall back to recorded replays ("Watch the attack").
+Until `lib/guild.ts` is implemented (or without `GUILD_API_KEY`), chat labs fall back to recorded replays ("Watch the attack").
 
 Guild agents: `cd guild && npm install`, then see `scripts/sync-guild.sh`.
 
