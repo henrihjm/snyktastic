@@ -94,7 +94,7 @@ Guild.ai · Next.js · TypeScript · Tailwind · Zod · Snyk. AI Security Engine
 
 ## Prompt injection defense game
 
-Open `/m/llm01` → **Break it** → **Play defense**. Press Start to watch a forged model-card approval reach the publisher, select an agent to place one guard, and replay. Flat bot faces show neutral, guarded, and misled states.
+Open `/m/llm01` → **Break it** → **Play defense**. The mission panel explains the route and offers **Guard Builder** and **Guard Reviewer** choices. Select one, press **Run defense**, and follow the Verdict Trace. The unprotected replay, pause, step, and reset controls let learners compare outcomes. Flat bot faces show neutral, guarded, and misled states.
 
 - Triage misses the document route; builder or reviewer checks stop the forged authority and finish the safe draft.
 - The publisher gate blocks release, but is only partial success because the draft workflow has not recovered.

@@ -25,6 +25,8 @@ export function PromptDefenseLab({ onSolved, onTrace, onResetTrace }: PuzzleLabP
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const frame = run?.frames[index];
+  const finished = Boolean(run && index === run.frames.length - 1);
+  const recommended = guard === "builder" || guard === "reviewer";
   const emitTrace = useEffectEvent(onTrace);
   const solved = useEffectEvent(onSolved);
 
@@ -34,20 +36,38 @@ export function PromptDefenseLab({ onSolved, onTrace, onResetTrace }: PuzzleLabP
       if (index + 1 < run.frames.length) {
         emitTrace(run.frames[index + 1].trace);
         setIndex(index + 1);
+        if (index + 1 === run.frames.length - 1) {
+          setPlaying(false);
+          if (run.outcome === "win") solved();
+        }
       } else {
         setPlaying(false);
-        if (run.outcome === "win") solved();
       }
     }, 950);
     return () => window.clearTimeout(timer);
   }, [playing, run, index]);
 
-  function start() {
+  function start(selectedGuard: Guard | null) {
     if (playing) return;
-    const next = simulatePromptDefense(guard);
+    const next = simulatePromptDefense(selectedGuard);
     onResetTrace();
     onTrace(next.frames[0].trace);
     setRun(next); setIndex(0); setPlaying(true);
+  }
+  function runDefense() {
+    if (!guard || playing) return;
+    if (run && !finished) { setPlaying(true); return; }
+    start(guard);
+  }
+  function step() {
+    if (!run || playing || finished) return;
+    const next = index + 1;
+    onTrace(run.frames[next].trace);
+    setIndex(next);
+    if (next === run.frames.length - 1 && run.outcome === "win") onSolved();
+  }
+  function reset() {
+    setPlaying(false); setGuard(null); setRun(null); setIndex(0); onResetTrace();
   }
   function choose(id: Guard) {
     if (playing) return;
@@ -63,6 +83,10 @@ export function PromptDefenseLab({ onSolved, onTrace, onResetTrace }: PuzzleLabP
     <section className={styles.game} aria-label="Synktastic prompt injection defense game">
       <header className="sg-header"><strong>SYNKTASTIC / PLAY LAB</strong><span>LLM01 · Local simulation</span></header>
       <div className="sg-intro"><div><h2>{promptDefense.title}</h2><p>One guard. Keep the real task moving.</p></div><span className="sg-round">1 guard</span></div>
+      <div className="sg-mission" aria-label="How to stop the attack">
+        <div className="sg-mission-copy"><span className="sg-tag">YOUR MISSION · STOP THE PUBLISH</span><p>The model card is untrusted, but its fake approval can travel from <b>Builder → Reviewer → Publisher → Registry</b>. Put one guard where an agent can check the claim before it becomes a publish request.</p><ol><li><b>1</b> Place a guard at Builder or Reviewer.</li><li><b>2</b> Run the defense and watch the trace.</li><li><b>3</b> If the registry is reached, move the guard and replay.</li></ol></div>
+        <div className="sg-mission-actions"><span>Choose a guard</span><button type="button" className={guard === "builder" ? "chosen" : ""} aria-pressed={guard === "builder"} disabled={playing} onClick={() => choose("builder")}>Guard Builder <small>Reject document authority</small></button><button type="button" className={guard === "reviewer" ? "chosen" : ""} aria-pressed={guard === "reviewer"} disabled={playing} onClick={() => choose("reviewer")}>Guard Reviewer <small>Require independent approval</small></button></div>
+      </div>
       <div className="sg-payload"><span className="sg-tag">MODEL CARD · UNTRUSTED</span><q>{promptDefense.payload}</q><span className="sg-real">Real task: {promptDefense.task}</span></div>
       <div className="sg-board">
         <svg className="sg-links" viewBox="0 0 100 392" preserveAspectRatio="none" aria-hidden="true">
@@ -77,9 +101,9 @@ export function PromptDefenseLab({ onSolved, onTrace, onResetTrace }: PuzzleLabP
         <div className={`sg-node sg-target ${tone("registry")}`}><strong>Registry</strong><small>{tone("registry") ? "Unauthorized publish" : "Keep locked"}</small></div>
         <div className={`sg-node sg-draft ${tone("draft")}`}><strong>Safe draft</strong><small>{tone("draft") ? "Complete ✓" : "Real task"}</small></div>
         {frame && <span aria-hidden="true" className={`sg-moving-dot ${frame.safe ? "safe" : ""}`} style={positions[frame.node]} />}
-        <span className="sg-board-hint">Click an agent to place your guard</span>
+        <span className="sg-board-hint">{guard ? `Guard at ${guard} · click another agent to move it` : "Choose Builder or Reviewer above, or click an agent here"}</span>
       </div>
-      <div className="sg-bottom"><div className="sg-result" role="status" aria-live="polite">{run ? (playing ? frame?.message : run.message) : guard ? `Guard placed at ${guard}. Test your defense.` : "Watch the attack, or place a guard first."}</div><button type="button" className="sg-play" disabled={playing} onClick={start}>{playing ? "Playing…" : run ? "↻ Replay" : "▶ Start"}</button></div>
+      <div className="sg-bottom"><div className="sg-result" role="status" aria-live="polite">{playing ? frame?.message : finished ? `${run?.message} ${run?.outcome === "win" ? "Continue to Patch it below." : "Move your guard to Builder or Reviewer, then run again."}` : guard ? recommended ? `Guard armed at ${guard}. Run the defense to stop the forged approval.` : `Guard armed at ${guard}. This may be too late or miss the model-card route; test it, then try Builder or Reviewer.` : "Choose a guard above to stop the attack, or watch the unprotected route first."}</div><div className="sg-playback"><button type="button" className="sg-play" disabled={playing || !guard} onClick={runDefense}>{playing ? "Playing…" : run && !finished ? "▶ Resume defense" : finished ? "↻ Replay defense" : "▶ Run defense"}</button><button type="button" className="sg-alt" disabled={playing || Boolean(guard)} onClick={() => start(null)}>Watch attack without guard</button><button type="button" className="sg-alt" disabled={!playing} onClick={() => setPlaying(false)}>Pause</button><button type="button" className="sg-alt" disabled={!run || playing || finished} onClick={step}>Step →</button><button type="button" className="sg-alt" onClick={reset}>Reset</button></div></div>
       <div className="sg-footer"><span><b className="sg-red-dot" />Fake instruction</span><span><b className="sg-mint-dot" />Legitimate work</span></div>
       <details className="sg-explanation"><summary>What does the guard do?</summary><p>{promptDefense.note}</p><p>Triage only sees issues. Builder rejects document-origin authority. Reviewer requires independent approval. Publisher blocks release but needs a recovery path to finish the draft.</p></details>
     </section>
