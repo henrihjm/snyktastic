@@ -8,7 +8,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   title: "Synktastic",
-  description: "Make the AI go rogue. Then learn how to stop it. The OWASP Top 10 for LLM Applications, hands-on.",
+  description: "AI agents went rogue. Trace prompt injections, place a defense, and replay the outcome.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header className="border-b border-slate-800">
           <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             <Link href="/" className="font-mono font-bold tracking-tight text-cyan-300">
-              🕵️ Synktastic
+              Synktastic
             </Link>
             <div className="flex gap-4 text-sm text-slate-300">
               <Link href="/">Course</Link>

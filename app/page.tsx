@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="mx-auto max-w-6xl space-y-10 px-4 py-10">
       <section className="space-y-4">
-        <p className="font-mono text-sm text-cyan-300">OWASP Top 10 for LLM Applications · 2025</p>
+        <p className="font-mono text-sm text-cyan-300">AI agents went rogue · OWASP Top 10 for LLM Applications</p>
         <h1 className="text-4xl font-black tracking-tight sm:text-5xl">
           Make the AI go rogue.
           <br />
