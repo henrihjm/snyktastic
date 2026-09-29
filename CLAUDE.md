@@ -207,4 +207,11 @@ Work on separate branches or directories to avoid merge conflicts. `content/type
 
 - Pivot (12:25): solo 3-level Guild game → team web app covering all 10 OWASP LLM risks. Reuse Rogue Agent levels as LLM06 / LLM03 / LLM02 labs.
 - Name: **Rogue Agent Academy** (open to team vote).
-- _(Add: stack confirmation, Guild REST API findings, final deadline/rubric)_
+- Stack: Next.js 16.3.7 (App Router, Turbopack) + React 19.2 + Tailwind 4 + Zod 4.3.6, all exact-pinned. No other runtime deps.
+- Added **Patch it** step to every module (`content/patches.ts`, `components/PatchLab.tsx`): pick defenses (control / partial / decoy), re-run attacks against the patched Verdict. Badge = patch passed + lab cleared (if playable). MCQ quiz is a short final check. `content/types.ts` unchanged.
+- Chat modules: LLM01 (new: grant screener + paste.example indirect injection), LLM02 (old L3), LLM03 (old L2), LLM06 (old L1), LLM07 (new: canary in prompt, win checked server-side on reply text).
+- Guard now prefixes every guarded tool result with a `VERDICT {...}` line (guild/core/guard.ts). Old published agents (level-1/2/3) need re-publishing to emit it.
+- Web ↔ Guild contract: `lib/guild.ts` `sendTurn({agent, sessionId?, message, signal}) → {sessionId, reply, toolOutputs[]}` (Dev A implements). Without GUILD_API_KEY the route returns 503 `{replay:true}` and the UI offers the recorded replay.
+- Puzzle labs register in `components/labs/index.ts` (`PuzzleLabProps { onSolved, onTrace }`).
+- Snyk baseline after scaffold: 0 open-source, 0 code issues.
+- _(Add: Guild REST API findings, final deadline/rubric)_

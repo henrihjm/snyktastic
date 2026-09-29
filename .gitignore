@@ -1,0 +1,21 @@
+# secrets — never commit
+.env*
+!.env.example
+*.pem
+
+# deps / build
+node_modules/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Guild agent working dirs (each is its own git repo; synced by scripts/sync-guild.sh)
+.guild/
+
+# misc
+.DS_Store
+*.log
+.vercel
