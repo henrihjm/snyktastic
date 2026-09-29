@@ -1,4 +1,4 @@
-# 🕵️ Rogue Agent Academy
+# 🕵️ Synktastic
 
 **Make the AI go rogue. Then learn how to stop it.**
 
@@ -21,7 +21,7 @@ re-run the attacks against your fix.
 
 | ID | Risk | Lab | Patch it |
 |---|---|---|---|
-| LLM01 | Prompt Injection | 💬 Grant-screening bot: direct + indirect injection via a page you publish | ✅ |
+| LLM01 | Prompt Injection | 🎮 Guard-placement defense game + 💬 grant-screening chat lab | ✅ |
 | LLM02 | Sensitive Information Disclosure | 💬 Leak FAKE patient IDs past a regex DLP (base64, spacing) | ✅ |
 | LLM03 | Supply Chain | 💬 Poisoned MCP server tool description redirects reports | ✅ |
 | LLM04 | Data and Model Poisoning | 🧩 Pick the poisoned fine-tune sample that flips the answer | ✅ |
@@ -91,3 +91,16 @@ Guild agents: `cd guild && npm install`, then see `scripts/sync-guild.sh`.
 ## Built with
 
 Guild.ai · Next.js · TypeScript · Tailwind · Zod · Snyk. AI Security Engineering Hackathon, AWS Builder Loft SF, Sept 29 2026.
+
+## Prompt injection defense game
+
+Open `/m/llm01` → **Break it** → **Play defense**. Press Start to watch a forged model-card approval reach the publisher, select an agent to place one guard, and replay. Flat bot faces show neutral, guarded, and misled states.
+
+- Triage misses the document route; builder or reviewer checks stop the forged authority and finish the safe draft.
+- The publisher gate blocks release, but is only partial success because the draft workflow has not recovered.
+- A full defense win marks the existing lab progress; the Patch it challenge remains required for the badge.
+- **Attack in chat** preserves the existing Guild lab, hints, and recorded fallback.
+- Trace scores represent the deliberately configured simulated checks, not an objective security rating. This deterministic game is not an injection classifier or a production guard.
+- No new dependencies, API requests, credentials, or executable payloads. Module timers stop when leaving the game.
+
+Validation: `node --test tests/prompt-defense.test.mjs`, `npm run build`, then `npm run typecheck` (Next generates route types during the build).

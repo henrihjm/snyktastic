@@ -24,7 +24,7 @@ export default function Security() {
           <thead className="border-b border-slate-700 text-slate-400">
             <tr>
               <th className="py-2 pr-4">Risk</th>
-              <th className="py-2">How Rogue Agent Academy mitigates it</th>
+              <th className="py-2">How Synktastic mitigates it</th>
             </tr>
           </thead>
           <tbody>

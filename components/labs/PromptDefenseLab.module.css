@@ -1,0 +1,448 @@
+
+.game{
+  --sg-bg:#090f10;
+  --sg-surface:#10191b;
+  --sg-ink:#edf6f2;
+  --sg-dim:#9baead;
+  --sg-line:#344247;
+  --sg-red:#ff526d;
+  --sg-mint:#72e9c2;
+  --sg-amber:#ffce7a;
+  background:var(--sg-bg);
+  color:var(--sg-ink);
+  font:14px/1.45 ui-sans-serif,system-ui,sans-serif;
+  border-radius:18px;
+  overflow:hidden;
+  width:100%;
+  color-scheme:dark}
+
+.game *{
+  box-sizing:border-box}
+.game button{
+  font:inherit}
+.game :global(.sg-header){
+  padding:18px 24px;
+  border-bottom:1px solid #233033;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  font-size:12px;
+  letter-spacing:.07em}
+.game strong{
+  font-weight:600}
+.game :global(.sg-header) strong{
+  color:var(--sg-mint)}
+.game :global(.sg-header) span{
+  color:var(--sg-dim)}
+.game :global(.sg-intro){
+  padding:22px 24px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px}
+.game h2{
+  margin:0;
+  font-size:25px;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:-.03em}
+.game p{
+  margin:6px 0 0;
+  color:var(--sg-dim)}
+.game :global(.sg-round){
+  border:1px solid #36584f;
+  border-radius:20px;
+  padding:7px 12px;
+  white-space:nowrap;
+  color:var(--sg-mint);
+  font-size:12px}
+.game :global(.sg-payload){
+  margin:0 24px 12px;
+  padding:12px 16px;
+  background:#201317;
+  border-left:3px solid var(--sg-red);
+  display:grid;
+  gap:5px}
+.game :global(.sg-tag){
+  font:11px ui-monospace,monospace;
+  color:var(--sg-red);
+  letter-spacing:.08em}
+.game q{
+  font-size:14px}
+.game :global(.sg-real){
+  font-size:12px;
+  color:var(--sg-dim)}
+
+.game :global(.sg-board){
+  height:392px;
+  position:relative;
+  margin:0 18px;
+  background-image:linear-gradient(#17212377 1px,transparent 1px),linear-gradient(90deg,#17212377 1px,transparent 1px);
+  background-size:25px 25px;
+  border-radius:10px}
+.game :global(.sg-links){
+  position:absolute;
+  width:100%;
+  height:100%;
+  inset:0;
+  overflow:visible}
+.game :global(.sg-links) path{
+  fill:none;
+  stroke:var(--sg-line);
+  stroke-width:1.5}
+.game :global(.sg-links) path:global(.hot){
+  stroke:var(--sg-red);
+  stroke-dasharray:6 6}
+.game :global(.sg-links) path:global(.good){
+  stroke:var(--sg-mint)}
+.game :global(.sg-packet){
+  fill:var(--sg-red);
+  filter:drop-shadow(0 0 7px var(--sg-red))}
+.game :global(.sg-good-packet){
+  fill:var(--sg-mint);
+  filter:drop-shadow(0 0 5px var(--sg-mint))}
+.game :global(.sg-column){
+  position:absolute;
+  top:12px;
+  color:var(--sg-dim);
+  font:11px ui-monospace,monospace;
+  letter-spacing:.1em;
+  text-align:center;
+  width:27%}
+.game :global(.sg-left){
+  left:0}
+.game :global(.sg-mid){
+  left:36.5%}
+.game :global(.sg-right){
+  right:0}
+.game :global(.sg-node){
+  position:absolute;
+  width:27%;
+  height:65px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1px;
+  border:1px solid var(--sg-line);
+  background:var(--sg-surface);
+  border-radius:10px;
+  color:var(--sg-ink);
+  padding:5px;
+  text-align:center;
+  transition:background .2s,border-color .2s,box-shadow .2s}
+.game :global(.sg-node) svg{
+  position:absolute;
+  left:10px;
+  width:16px;
+  height:16px;
+  color:var(--sg-dim)}
+.game :global(.sg-node) strong{
+  font-size:13px}
+.game :global(.sg-node) small{
+  font-size:11px;
+  color:var(--sg-dim)}
+.game :global(.sg-agent){
+  left:36.5%}
+.game :global(.sg-agent):hover:not(:disabled){
+  border-color:var(--sg-mint)}
+.game :global(.sg-agent)[aria-pressed=true]{
+  border:2px solid var(--sg-mint);
+  background:#122b24;
+  box-shadow:0 0 22px #72e9c215}
+.game :global(.sg-agent)[aria-pressed=true] small{
+  color:var(--sg-mint)}
+.game :global(.sg-node):global(.infected){
+  border-color:var(--sg-red);
+  background:#29141b}
+.game :global(.sg-node):global(.secure){
+  border-color:var(--sg-mint);
+  background:#122b24}
+.game :global(.sg-source){
+  left:0;
+  top:125px;
+  border-color:#854052;
+  background:#23151b}
+.game [data-node=triage]{
+  top:43px}
+.game [data-node=builder]{
+  top:125px}
+.game [data-node=reviewer]{
+  top:207px}
+.game [data-node=publisher]{
+  top:289px}
+.game :global(.sg-target){
+  right:0;
+  top:289px;
+  border-color:#996844}
+.game :global(.sg-draft){
+  right:0;
+  top:125px}
+.game :global(.sg-board-hint){
+  position:absolute;
+  bottom:5px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:var(--sg-dim);
+  font-size:11px}
+.game :global(.sg-bottom){
+  padding:16px 24px;
+  display:flex;
+  gap:16px;
+  align-items:center;
+  justify-content:space-between;
+  border-top:1px solid #233033}
+.game :global(.sg-result){
+  font-size:13px;
+  max-width:76%}
+.game :global(.sg-play){
+  border:0;
+  border-radius:9px;
+  background:var(--sg-mint);
+  color:#092219;
+  padding:11px 21px;
+  white-space:nowrap;
+  font-weight:600;
+  min-height:44px}
+.game button:disabled{
+  opacity:.7}
+.game :global(.sg-footer){
+  padding:0 24px 16px;
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  color:var(--sg-dim);
+  font-size:11px}
+.game :global(.sg-footer) span:last-child{
+  margin-left:auto}
+.game :global(.sg-footer) b{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  margin-right:5px}
+.game :global(.sg-red-dot){
+  background:var(--sg-red)}
+.game :global(.sg-mint-dot){
+  background:var(--sg-mint)}
+
+@media(max-width:560px){
+  .game :global(.sg-node) svg{
+  display:none}
+.game :global(.sg-header){
+  padding:14px;
+  letter-spacing:0;
+  flex-wrap:wrap}
+.game :global(.sg-intro){
+  padding:18px 14px 12px}
+.game h2{
+  font-size:21px}
+.game :global(.sg-payload){
+  margin:0 14px 12px;
+  padding:10px}
+.game :global(.sg-board){
+  margin:0 8px}
+.game :global(.sg-node) small{
+  font-size:11px}
+.game :global(.sg-node) strong{
+  font-size:12px}
+.game :global(.sg-bottom){
+  padding:14px;
+  gap:10px}
+.game :global(.sg-play){
+  padding:10px 13px}
+.game :global(.sg-footer){
+  padding:0 14px 14px;
+  gap:10px}
+.game :global(.sg-round){
+  padding:6px 9px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .game :global(.sg-node){
+  transition:none}
+}
+
+
+.game :global(.sg-links) path {
+   vector-effect: non-scaling-stroke;
+   }
+
+.game :global(.sg-links) :global(.attack-path) {
+   stroke: var(--sg-red);
+   stroke-dasharray: 5 5;
+   }
+
+.game button {
+   cursor: pointer;
+   }
+
+.game button:disabled {
+   cursor: wait;
+   }
+
+.game button:focus-visible, .game summary:focus-visible {
+   outline: 3px solid var(--sg-mint);
+   outline-offset: 3px;
+   }
+
+.game :global(.sg-moving-dot) {
+   position: absolute;
+   width: 12px;
+   height: 12px;
+   border-radius: 50%;
+   background: var(--sg-red);
+   box-shadow: 0 0 12px var(--sg-red);
+   transform: translate(-50%,-50%);
+   transition: left .65s linear, top .65s linear;
+   pointer-events: none;
+   }
+
+.game :global(.sg-moving-dot.safe) {
+   background: var(--sg-mint);
+   box-shadow: 0 0 12px var(--sg-mint);
+   }
+
+.game :global(.sg-explanation) {
+   padding: 0 24px 18px;
+   color: var(--sg-dim);
+   font-size: 12px;
+   }
+
+.game :global(.sg-explanation) summary {
+   cursor: pointer;
+   }
+
+@media(prefers-reduced-motion:reduce) {
+   .game :global(.sg-moving-dot) {
+   transition: none;
+   }
+ }
+
+
+/* Flat, expressive bot faces. No images or animation dependencies. */
+.game :global(.sg-agent) {
+   flex-direction: row;
+   gap: 9px;
+   border-radius: 8px;
+   }
+
+.game :global(.sg-agent-label) {
+   display: flex;
+   flex-direction: column;
+   text-align: left;
+   }
+
+.game :global(.sg-bot) {
+   position: relative;
+   display: inline-flex;
+   flex-shrink: 0;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 4px;
+   width: 32px;
+   height: 27px;
+   border-radius: 9px;
+   background: #dce8e5;
+   color: #102322;
+   }
+
+.game :global(.sg-bot)::before {
+   content: '';
+   position: absolute;
+   top: -5px;
+   width: 3px;
+   height: 5px;
+   background: #dce8e5;
+   }
+
+.game :global(.sg-eyes) {
+   display: flex;
+   gap: 7px;
+   }
+
+.game :global(.sg-eyes) i {
+   display: block;
+   width: 4px;
+   height: 6px;
+   border-radius: 2px;
+   background: currentColor;
+   }
+
+.game :global(.sg-mouth) {
+   width: 8px;
+   height: 3px;
+   border-bottom: 2px solid currentColor;
+   border-radius: 0 0 5px 5px;
+   }
+
+.game :global(.sg-bot-builder) {
+   border-radius: 4px;
+   }
+
+.game :global(.sg-bot-reviewer) :global(.sg-eyes) {
+   border-bottom: 1px solid currentColor;
+   padding: 1px 2px;
+   }
+
+.game :global(.sg-bot-publisher) {
+   border-radius: 12px 12px 5px 5px;
+   }
+
+.game :global(.sg-agent[aria-pressed=true]) :global(.sg-bot), .game :global(.secure) :global(.sg-bot) {
+   background: var(--sg-mint);
+   }
+
+.game :global(.infected) :global(.sg-bot) {
+   background: var(--sg-red);
+   }
+
+.game :global(.infected) :global(.sg-eyes) i:first-child {
+   transform: rotate(-25deg);
+   }
+
+.game :global(.infected) :global(.sg-eyes) i:last-child {
+   transform: rotate(25deg);
+   }
+
+.game :global(.infected) :global(.sg-mouth) {
+   border-top: 2px solid currentColor;
+   border-bottom: 0;
+   border-radius: 5px 5px 0 0;
+   }
+
+.game :global(.secure) :global(.sg-mouth) {
+   height: 4px;
+   border-radius: 0 0 6px 6px;
+   }
+
+@media(max-width:560px) {
+  
+  .game :global(.sg-agent) {
+   flex-direction: column;
+   gap: 2px;
+   }
+
+  .game :global(.sg-agent-label) {
+   text-align: center;
+   }
+
+  .game :global(.sg-bot) {
+   width: 25px;
+   height: 19px;
+   gap: 2px;
+   }
+
+  .game :global(.sg-eyes) i {
+   height: 4px;
+   }
+
+  .game :global(.sg-agent-label) small {
+   font-size: 10px;
+   }
+
+}
+
