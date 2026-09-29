@@ -11,7 +11,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/m/[id]">): Promise<Metadata> {
   const mod = getModule((await params).id);
-  return { title: mod ? `${mod.id} ${mod.title} · Rogue Agent Academy` : "Rogue Agent Academy" };
+  return { title: mod ? `${mod.id} ${mod.title} · Synktastic` : "Synktastic" };
 }
 
 export default async function ModulePage({ params }: PageProps<"/m/[id]">) {
